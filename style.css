@@ -9,6 +9,18 @@
     }
 }
 
+/*
+.ad {
+    float: left;
+}
+*/
+.ad {
+    width: 25%; /* Breite für das Werbeelement */
+    background-color: rgba(255, 255, 0, 0.5); /* Beispielhintergrund für die Werbung */
+    padding: 20px;
+    box-sizing: border-box; /* Damit Padding die Breite nicht beeinflusst */
+}
+
 @media only screen and (min-width: 501px) {
     body {
         background-color: rgb(2, 240, 14);
@@ -32,11 +44,16 @@ body {
     box-sizing: border-box;
 }
 
+.outer_container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .container {
     border-radius: 5px;
     height: 97vh;
-    width: 80%;
-    margin: 0 auto;
+    width: 70%;
+    margin: 0;
     text-align: left;
     background-color: rgb(113, 219, 157);
 }
