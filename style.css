@@ -23,6 +23,10 @@
 
 body {
     color: rgb(117, 88, 88);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 main {
@@ -31,17 +35,10 @@ main {
 
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .outer_container {
     display: flex;
     justify-content: space-between;
-
+    margin: 1%;
 }
 
 .ad {
