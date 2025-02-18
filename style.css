@@ -6,6 +6,10 @@
     --list_background_color: white;
 }
 
+audio {
+    margin: auto;
+}
+
 body {
     background: var(--background_color) !important;
     color: var(--background_color) !important;
