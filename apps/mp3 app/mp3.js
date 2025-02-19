@@ -4,7 +4,9 @@ const fileInput = document.getElementById('files');
 const audioPlayer = document.getElementById('audioPlayer');
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
-const skipButton = document.getElementById('skipButton');
+const backButton = document.getElementById('backButton');
+const forButton = document.getElementById('forButton');
+
 let currentFileIndex = 0;
 let audioFiles = [];
 
@@ -13,9 +15,10 @@ fileInput.addEventListener('change', () => {
     audioFiles = Array.from(fileInput.files);
     if (audioFiles.length > 0) {
         loadAudioFile(audioFiles[currentFileIndex]);
-        startButton.disabled = false; // Enable the Start button
-        stopButton.disabled = false;  // Enable the Stop button
-        skipButton.disabled = false; // Enable the Skip button
+        startButton.disabled = false;
+        stopButton.disabled = false;
+        backButton.disabled = false;
+        forButton.disabled = false;
     } else {
         console.error("No file selected");
     }
@@ -28,12 +31,10 @@ function loadAudioFile(file) {
 }
 
 // Skip to the next track
-skipButton.addEventListener('click', () => {
-    if (audioFiles.length > 0) {
-        currentFileIndex = (currentFileIndex + 1) % audioFiles.length; // Loop back to the first file if at the end
-        loadAudioFile(audioFiles[currentFileIndex]);
-        audioPlayer.play();
-    }
+forButton.addEventListener('click', () => {
+    currentFileIndex = (currentFileIndex + 1) % audioFiles.length;
+    loadAudioFile(audioFiles[currentFileIndex]);
+    audioPlayer.play();
 });
 
 // Toggle between files when they finish
