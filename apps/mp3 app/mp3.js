@@ -2,8 +2,6 @@ console.log("MP3 player script is loaded");
 
 const fileInput = document.getElementById('files');
 const audioPlayer = document.getElementById('audioPlayer');
-const startButton = document.getElementById('startButton');
-const stopButton = document.getElementById('stopButton');
 const backButton = document.getElementById('backButton');
 const forButton = document.getElementById('forButton');
 
@@ -14,13 +12,14 @@ let audioFiles = [];
 fileInput.addEventListener('change', () => {
     audioFiles = Array.from(fileInput.files);
     if (audioFiles.length > 0) {
+        currentFileIndex = 0;
         loadAudioFile(audioFiles[currentFileIndex]);
-        startButton.disabled = false;
-        stopButton.disabled = false;
-        backButton.disabled = false;
-        forButton.disabled = false;
+        updateButtons();
+        audioPlayer.play();
     } else {
         console.error("No file selected");
+        backButton.disabled = true;
+        forButton.disabled = true;
     }
 });
 
@@ -30,16 +29,38 @@ function loadAudioFile(file) {
     audioPlayer.src = objectURL;
 }
 
-// Skip to the next track
+// Forward button
 forButton.addEventListener('click', () => {
-    currentFileIndex = (currentFileIndex + 1) % audioFiles.length;
-    loadAudioFile(audioFiles[currentFileIndex]);
-    audioPlayer.play();
+    if (currentFileIndex < audioFiles.length - 1) {
+        currentFileIndex++;
+        loadAudioFile(audioFiles[currentFileIndex]);
+        audioPlayer.play();
+        updateButtons();
+    }
 });
 
-// Toggle between files when they finish
-audioPlayer.addEventListener('ended', () => {
-    currentFileIndex = (currentFileIndex + 1) % audioFiles.length;
-    loadAudioFile(audioFiles[currentFileIndex]);
-    audioPlayer.play();
+// Back button
+backButton.addEventListener('click', () => {
+    if (currentFileIndex > 0) {
+        currentFileIndex--;
+        loadAudioFile(audioFiles[currentFileIndex]);
+        audioPlayer.play();
+        updateButtons();
+    }
 });
+
+// Auto-play next track when current ends
+audioPlayer.addEventListener('ended', () => {
+    if (currentFileIndex < audioFiles.length - 1) {
+        currentFileIndex++;
+        loadAudioFile(audioFiles[currentFileIndex]);
+        audioPlayer.play();
+        updateButtons();
+    }
+});
+
+// Enable/disable buttons based on current track
+function updateButtons() {
+    backButton.disabled = currentFileIndex === 0;
+    forButton.disabled = currentFileIndex === audioFiles.length - 1;
+}
