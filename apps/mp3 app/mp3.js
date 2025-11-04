@@ -1,8 +1,8 @@
 // mp3.js
 
-console.log("MP3 player script is loaded");
-
 document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("MP3 player script is loaded");
 
     const fileInput = document.getElementById('files');
     const audioPlayer = document.getElementById('audioPlayer');
